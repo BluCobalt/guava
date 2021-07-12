@@ -57,10 +57,10 @@ Guidelines for any code contributions:
 
 #### Merging pull requests ####
 
-Due to Guava's nature as a subset of Google's internal codebase which is
+Due to Guava's nature as a subset of Google's com.google.common.util.concurrent.internal codebase which is
 automatically synced to the public GitHub repository, we are unable to merge
 pull requests directly into the master branch. Instead, once a pull request is
-ready for merging, we'll make the appropriate changes in the internal codebase
+ready for merging, we'll make the appropriate changes in the com.google.common.util.concurrent.internal codebase
 and, when the change is synced out, give the pull request author credit for the
 commit.
 

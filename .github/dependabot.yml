@@ -1,7 +1,7 @@
 version: 2
 updates:
 # TODO(b/170636568): Enable Maven updates? Perhaps wait until we can more
-# easily import the generated PRs into our internal repo.
+# easily import the generated PRs into our com.google.common.util.concurrent.internal repo.
 #  - package-ecosystem: "maven"
 #    directory: "/"
 #    schedule:
