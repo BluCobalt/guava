@@ -1062,6 +1062,53 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * computation is {@linkplain java.util.concurrent.Future#isDone() complete} or, if the
    * computation is already complete, immediately.
    *
+   * <p>There is no guaranteed ordering of execution of callbacks, but any callback added through
+   * this method is guaranteed to be called once the computation is complete.
+   *
+   * <p>Example:
+   *
+   * <pre>{@code
+   * ListenableFuture<QueryResult> future = ...;
+   * addCallback(future,
+   *     new FutureCallback<QueryResult>() {
+   *       public void onSuccess(QueryResult result) {
+   *         storeInCache(result);
+   *       }
+   *       public void onFailure(Throwable t) {
+   *         reportError(t);
+   *       }
+   *     });
+   * }</pre>
+   *
+   * <p>This overload, which does not accept an executor, uses {@code directExecutor}, a dangerous
+   * choice in some cases. See the discussion in the {@link ListenableFuture#addListener
+   * ListenableFuture.addListener} documentation. All its warnings about heavyweight listeners are
+   * also applicable to heavyweight callbacks passed to this method.
+   *
+   * <p>For a more general interface to attach a completion listener to a {@code Future}, see {@link
+   * ListenableFuture#addListener addListener}.
+   *
+   * @param future The future attach the callback to.
+   * @param callback The callback to invoke when {@code future} is completed.
+   * @since 10.0
+   * @deprecated Use {@linkplain #addCallback(ListenableFuture, FutureCallback, Executor) the
+   *     overload that requires an executor}. For identical behavior, pass {@link
+   *     MoreExecutors#directExecutor}, but consider whether another executor would be safer, as
+   *     discussed in the {@link ListenableFuture#addListener ListenableFuture.addListener}
+   *     documentation. This method is scheduled to be removed in April 2018.
+   */
+  @Deprecated
+  public static <V> void addCallback(
+          ListenableFuture<V> future, FutureCallback<? super V> callback)
+  {
+    addCallback(future, callback, directExecutor());
+  }
+
+  /**
+   * Registers separate success and failure callbacks to be run when the {@code Future}'s
+   * computation is {@linkplain java.util.concurrent.Future#isDone() complete} or, if the
+   * computation is already complete, immediately.
+   *
    * <p>The callback is run on {@code executor}. There is no guaranteed ordering of execution of
    * callbacks, but any callback added through this method is guaranteed to be called once the
    * computation is complete.
@@ -1101,7 +1148,8 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   public static <V extends @Nullable Object> void addCallback(
       final ListenableFuture<V> future,
       final FutureCallback<? super V> callback,
-      Executor executor) {
+      Executor executor)
+  {
     Preconditions.checkNotNull(callback);
     future.addListener(new CallbackListener<V>(future, callback), executor);
   }

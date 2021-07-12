@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.google.guava</groupId>
-  <artifactId>guava-parent</artifactId>
-  <version>HEAD-jre-SNAPSHOT</version>
+  <groupId>dev.blucobalt</groupId>
+  <artifactId>mcguava</artifactId>
+  <version>0.01</version>
   <packaging>pom</packaging>
   <name>Guava Maven Parent</name>
   <description>Parent for guava artifacts</description>
