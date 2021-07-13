@@ -17,6 +17,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-java {
-    withJavadocJar()
-}
+tasks.withType(Javadoc).all {
+    enabled = false
+} // non ascii characters make it crash
