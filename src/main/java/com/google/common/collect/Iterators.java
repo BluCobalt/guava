@@ -75,9 +75,11 @@ public final class Iterators {
   /**
    * Returns the empty iterator.
    *
-   * <p>The {@link Iterable} equivalent of this method is {@link ImmutableSet#of()}.
+   * <p>The {@link Iterable} equivalent of this method is {@link
+   * ImmutableSet#of()}.
+   *
    */
-  static <T extends @Nullable Object> UnmodifiableIterator<T> emptyIterator() {
+  public static <T> UnmodifiableIterator<T> emptyIterator() {
     return emptyListIterator();
   }
 
