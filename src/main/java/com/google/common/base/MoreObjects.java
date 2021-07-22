@@ -26,6 +26,7 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 
 /**
  * Helper functions that operate on any {@code Object}, and are not already provided in {@link
@@ -78,13 +79,9 @@ public final class MoreObjects {
    * consider the more flexible signature if we judge it worth the risks. If we do, we would likely
    * update both methods so that they continue to match.
    */
-  public static <T> T firstNonNull(@CheckForNull T first, T second) {
-    if (first != null) {
-      return first;
-    }
-    if (second != null) {
-      return second;
-    }
+  public static <T> T firstNonNull(@Nullable T first, @Nullable T second) {
+    if (first != null) return first;
+    if (second != null) return second;
     throw new NullPointerException("Both parameters are null");
   }
 
