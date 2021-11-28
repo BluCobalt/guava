@@ -4,8 +4,8 @@
 name: publish
 
 on:
-  push:
-    branches: [ master ]
+  [workflow_dispatch, push]
+    
 
 jobs:
   build:
