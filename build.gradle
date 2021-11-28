@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.blucobalt"
-version = "0.08-SNAPSHOT"
+version = "0.07"
 
 
 repositories {
