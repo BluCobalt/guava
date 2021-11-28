@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.blucobalt"
-version = "0.07"
+version = "0.08-SNAPSHOT"
 
 
 repositories {
@@ -35,34 +35,27 @@ javadoc {
         failOnError false
     }
 }
+def ENV = System.getenv()
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = group
             artifactId = 'mcguava'
-            artifact(sourcesJar) {
-                builtBy sourcesJar
-            }
-            artifact("${project.buildDir}/lib/$archivesBaseName-${version}.jar") {
-                builtBy build
-            }
-            artifact(javadocJar) {
-                builtBy javadocJar
-            }
+           from components.java
         }
     }
-}
-repositories {
-    if (System.getenv().MAVEN_PUBLISH_KEY) {
+    repositories {
+    if (ENV.MAVEN_PUBLISH_KEY) {
         maven {
             url "https://repo.blucobalt.dev/repository/maven-hosted"
             credentials {
                 username 'github-actions'
-                password System.getenv().MAVEN_PUBLISH_KEY
+                password ENV.MAVEN_PUBLISH_KEY
             }
             authentication {
                 basic(BasicAuthentication)
             }
         }
     }
+}
 }
